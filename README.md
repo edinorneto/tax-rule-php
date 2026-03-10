@@ -1,50 +1,86 @@
 # 📊 ICMS Tax Rule Simulator (PHP)
 
-**Note:** This project uses **synthetic data** (fictional tax rates and values) generated for simulation purposes only. It is designed as a technical exercise to consolidate backend logic.
+> **Disclaimer:** This project uses **synthetic (fictional) data** for learning purposes only. It is a technical exercise to practice backend logic and **must not** be used for real tax calculation or compliance.
 
-This project focuses on applying **PHP Fundamentals**—specifically **Control Structures** and **Operators**—to solve a real-world micro-problem in the fiscal sector: determining and calculating applicable ICMS rates for interstate operations. 
+A small PHP 8.x simulator that determines whether an operation is **internal** or **interstate** and applies **ICMS** and (optionally) **FCP** rules based on simple conditional logic.
 
-The goal is to demonstrate the "Study, Apply, and Share" methodology by converting theoretical concepts from the **PHP Manual** into a functional business tool. [9, 10]
+## 🎯 Purpose
+This repository was built to practice **PHP fundamentals** (control structures and operators) by implementing a realistic micro-problem: selecting rates and calculating totals for an interstate operation scenario.
 
-### 🛠 Technologies & Concepts
-*   **Language:** PHP 8.x (Basic Syntax, Variables, and Types)
-*   **Control Structures:** `if/else`, `switch case`, Ternary Operator, and Null Coalescing (`??`) 
-*   **Business Logic:** Implementation of fiscal rules for ICMS and FCP (Poverty Combat Fund).
-*   **Version Control:** Git & GitHub following professional commit standards. [1, 14]
+## 🛠 Tech Stack & Concepts
+- **PHP 8.x**
+- **Control Structures:** `if/else`, `switch`, ternary operator `?:`
+- **Operators:** comparisons, arithmetic, and **null coalescing** `??`
+- **Project organization:** simple separation between UI (`index.php`) and engine (`process.php`)
+- **Version control:** Git & GitHub
 
-### 📁 Project Structure
-The project is organized to separate logical processing from data entry, following early best practices for modularity.
-*   `index.php`: HTML interface with a form to capture simulation data (Value, Origin, Destination).
-*   `process.php`: The core engine that processes tax rules and returns calculated results.
-*   `README.md`: Technical documentation and project overview.
+## 📁 Project Structure
+- `index.php` — Simple HTML interface with a form (value, origin UF, destination UF)
+- `process.php` — Core engine: validates input, applies tax rules, returns calculated results
+- `README.md` — Documentation
 
-### 🧩 Business Rules & Logic Implementation
-To demonstrate mastery of **PHP Expressions and Operators**, this simulator validates:
-1.  **Operation Type:** Uses `if/else` to compare Origin and Destination UFs to identify if the operation is Internal or Interstate.
-2.  **Dynamic Rate Selection:** A `switch` block maps the destination state to its specific tax rate, ensuring efficient code organization.
-3.  **FCP (Poverty Combat Fund):** Employs the **Ternary Operator** to determine surcharge eligibility based on simple logic.
-4.  **Data Integrity:** Uses **Null Coalescing** (`??`) to handle empty inputs and ensure the system doesn't crash if data is missing.
+## 🧩 Business Rules (Simulation)
+The simulator implements the following logic:
 
-### 🚀 Getting Started
-1.  **Clone the project:**
-    ```bash
-    git clone https://github.com/your-username/icms-tax-simulator.git
-    ```
-2.  **Access the folder:**
-    ```bash
-    cd icms-tax-simulator
-    ```
-3.  **Run with PHP's built-in server:**
-    ```bash
-    php -S localhost:8000
-    ```
-4.  Open `http://localhost:8000` in your browser.
+1. **Operation type (Internal vs Interstate)**
+   - If **origin UF == destination UF** → Internal operation
+   - Else → Interstate operation
 
-### 📈 Learning Outcomes
-*   Consolidated knowledge of **PHP Syntax** and **Expressions**.
-*   Applied **Conditional Structures** to complex tax scenarios. 
-*   Practiced **Clean Code** by naming variables and functions descriptively.
-*   Documented technical evolution as part of a structured **Career Plan**.
+2. **Rate selection (ICMS)**
+   - A `switch` statement maps **destination UF** to a simulated ICMS rate.
 
----
-👨‍💻 **Author:** Edinor de Souza Neto - https://www.linkedin.com/in/edinor-de-souza-neto/ 
+3. **FCP (Poverty Combat Fund)**
+   - A ternary condition decides whether an FCP surcharge applies (simulation rule).
+
+4. **Data integrity**
+   - Uses `??` (null coalescing) to safely handle missing form fields and prevent runtime errors.
+
+> Note: The rates and conditions are intentionally simplified and fictional.
+
+## ✅ Requirements
+- PHP **8.x**
+
+## 🚀 Getting Started
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/edinorneto/tax-rule-php.git
+   ```
+
+2. **Enter the project folder**
+   ```bash
+   cd tax-rule-php
+   ```
+
+3. **Run with PHP built-in server**
+   ```bash
+   php -S localhost:8000
+   ```
+
+4. **Open in your browser**
+   - `http://localhost:8000`
+
+## 🧪 Example (Expected Flow)
+1. Enter:
+   - Value: `1000.00`
+   - Origin: `SP`
+   - Destination: `RJ`
+2. The app:
+   - Detects it as **interstate**
+   - Selects the ICMS rate by destination UF
+   - Applies FCP (if eligible by rule)
+   - Shows calculated amounts and totals
+
+*(The exact output depends on the fictional mapping inside `process.php`.)*
+
+## 📌 Notes / Limitations
+- This is a **learning project**, not a fiscal product.
+- State rules are simplified and do not represent real ICMS legislation.
+- If you want, you can extend it by:
+  - moving rates to an array/config file,
+  - adding UF validation,
+  - adding automated tests,
+  - returning results as JSON for a future frontend.
+
+## 👨‍💻 Author
+**Edinor de Souza Neto**  
+LinkedIn: https://www.linkedin.com/in/edinor-de-souza-neto/
