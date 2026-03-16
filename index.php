@@ -3,24 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICMS Tax Rule Simulator</title>
-    <link rel="stylesheet" href="">
+    <title>Cadastro Fiscal PHP</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Simulação de Regra de ICMS de SC - Com base na UF </h1>
-    <form action="process.php" method="get">
-        <label for="Digite para qual estado deseja consultar:"></label>
-        <input type="radio" name="UF" id="SC">
-        <label for="UF">SC</label>
-        <input type="radio" name="UF" id="PR">
-        <label for="UF">PR</label>
-        <input type="radio" name="UF" id="RS">
-        <label for="UF">RS</label>
-        <input type="radio" name="UF" id="MT">
-        <label for="UF">MT</label>
-        <input type="radio" name="UF" id="SP">
-        <label for="UF">SP</label>
-        <button type="submit">Consultar</button>
-    </form>
+
+    <header class="page-header">
+        <div class="eyebrow">Simulador Fiscal · PHP</div>
+        <h1>Cadastro Fiscal <span>PHP</span></h1>
+        <p class="subtitle">
+            Cadastre produtos e consulte tributos para emissão de NF-e.<br>
+            Dados sintéticos — somente para fins educacionais.
+        </p>
+    </header>
+    
+    <main class="menu-grid">
+        
+        <a href="cadastro.php" class="menu-card">
+            <div>
+                <span class="menu-card-icon">📦</span>
+                <h2 class="menu-card-title">Cadastrar Produto</h2>
+                <p class="menu-card-desc">
+                    Registre nome, NCM, preço, estoque e categoria. Os dados ficam salvos em JSON.
+                </p>
+            </div>
+            <div class="menu-card-arrow">Acessar &rarr;</div>
+        </a>
+
+        <a href="consulta.php" class="menu-card">
+            <div>
+                <span class="menu-card-icon">📄</span>
+                <h2 class="menu-card-title">Consultar Tributos</h2>
+                <p class="menu-card-desc">
+                    Selecione o produto, regime tributário e destino para obter os dados da NF-e.
+                </p>
+            </div>
+            <div class="menu-card-arrow">Acessar &rarr;</div>
+        </a>
+
+    </main>  
+
+    <footer class="page-footer">
+        <p>Projeto de estudo · <a href="https://www.linkedin.com/in/edinor-de-souza-neto/" target="_blank">Edinor de Souza Neto</a> · PHP 8.x</p>
+    </footer>
+
 </body>
 </html>
