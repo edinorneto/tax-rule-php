@@ -44,6 +44,8 @@ require_once 'data.php';
             }
         }
 
+        $proximo_id = $ultimo_id + 1;
+
         $novo_produto = [
             'id' => $proximo_id,
             'nome' => $nome,
@@ -62,10 +64,38 @@ require_once 'data.php';
 
     }
 
-    else {
-
-        foreach ($erros as $erro) {
-            echo $erro . '<br>';
-        }
-    }
 ?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<?php if (empty($erros)): ?>
+    <div class="alert a-s">
+        <span class="alert-icon">✓</span>
+        <div>Produto cadastrado com sucesso!</div>
+        <a href="cadastro.php" class="btn btn-s">+ Novo cadastro</a>
+        <a href="index.php" class="btn btn-p">Menu principal →</a>
+    </div>
+
+<?php else: ?>
+    <div class="alert a-e">
+        <span class="alert-icon">✗</span>
+        <div>
+            <?php foreach ($erros as $erro):?>
+                <p><?=$erro?></p>
+            <?php endforeach; ?>
+        </div>
+    </div>               
+    <a href="cadastro.php" class="btn btn-s">← Voltar e corrigir</a>
+        
+<?php endif;?>
+
+</body>
+</html>
