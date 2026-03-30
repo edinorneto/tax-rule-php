@@ -553,3 +553,179 @@ select option { background: var(--bg-raised); color: var(--text-primary); }
   .btn-row { grid-template-columns: 1fr; }
   .card-body, .result-section, .rs { padding: 18px; }
 }
+
+/* ============================================================
+   FASE 5 — Gerenciamento de Produtos (produtos.php / editar.php)
+   ============================================================ */
+
+/* ── Card largo — produtos.php precisa de mais espaço ── */
+.card-wide {
+  width: 100%;
+  max-width: 860px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+
+.page-header-wide {
+  width: 100%;
+  max-width: 860px;
+  margin-bottom: 32px;
+  animation: fadeDown 0.5s ease both;
+}
+
+/* ── Tabela de produtos ── */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.product-table th {
+  padding: 11px 16px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.product-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.product-table tbody tr:last-child { border-bottom: none; }
+.product-table tbody tr:hover { background: var(--bg-hover); }
+
+.product-table td {
+  padding: 13px 16px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.product-table td.td-muted {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.product-table td.td-actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Botões inline de ação (dentro da tabela) ── */
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn-action:hover { transform: translateY(-1px); }
+.btn-action:active { transform: translateY(0); }
+
+/* editar — azul */
+.btn-action-edit {
+  color: var(--blue);
+  background: var(--blue-dim);
+  border-color: var(--blue-border);
+}
+.btn-action-edit:hover {
+  background: rgba(91,156,246,0.2);
+}
+
+/* ativar — verde */
+.btn-action-activate {
+  color: var(--green);
+  background: var(--green-dim);
+  border-color: var(--green-border);
+}
+.btn-action-activate:hover {
+  background: rgba(61,232,151,0.2);
+}
+
+/* inativar — âmbar */
+.btn-action-deactivate {
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-color: var(--accent-border);
+}
+.btn-action-deactivate:hover {
+  background: rgba(245,166,35,0.22);
+}
+
+/* apagar — vermelho */
+.btn-action-delete {
+  color: var(--red);
+  background: var(--red-dim);
+  border-color: var(--red-border);
+}
+.btn-action-delete:hover {
+  background: rgba(255,92,92,0.2);
+}
+
+/* grupo de botões inline */
+.action-group {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ── Menu grid com 3 colunas (index.php atualizado) ── */
+.menu-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 860px;
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+
+/* ── Contador de produtos no header da tabela ── */
+.table-count {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.table-count strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .card-wide, .page-header-wide { max-width: 100%; }
+  .menu-grid-3 { grid-template-columns: 1fr; }
+
+  /* esconde colunas menos críticas em mobile */
+  .product-table .col-categoria,
+  .product-table .col-estoque { display: none; }
+
+  .product-table th,
+  .product-table td { padding: 10px 12px; }
+
+  .action-group { flex-direction: column; gap: 4px; }
+  .btn-action { font-size: 0.6rem; padding: 4px 9px; }
+}
