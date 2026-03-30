@@ -3,69 +3,78 @@
 require_once 'config.php';
 require_once 'data.php';
 
-    $nome = trim($_POST['nome'] ?? '');
-    $categoria = trim($_POST['categoria'] ?? '');
-    $ncm = trim($_POST['ncm'] ?? '');
-    $preco = trim($_POST['preco'] ?? '');
-    $estoque = trim($_POST['estoque'] ?? '');
-    $un = trim($_POST['unidade'] ?? '');
-    $ativo = trim($_POST['ativo'] ?? 'Sim');
+$nome = trim($_POST['nome'] ?? '');
+$descricao = trim($_POST['descricao'] ?? '');
+$categoria = trim($_POST['categoria'] ?? '');
+$ncm = trim($_POST['ncm'] ?? '');
+$preco = trim($_POST['preco'] ?? '');
+$estoque = trim($_POST['estoque'] ?? '');
+$un = trim($_POST['unidade'] ?? '');
+$ativo = trim($_POST['ativo'] ?? '1'); // 1=Ativo, 0=Inativo
 
-    $erros = [];
+$erros = [];
 
-    if (empty($nome)) {
-        $erros[] = "Nome é obrigatório.";
-    }
-    
-    if (strlen($ncm) !== 8 || !ctype_digit($ncm)) {
-        $erros[] = 'NCM inválido: deve conter exatamente 8 dígitos.';
-    }
+// validações básicas
+if (empty($nome)) {
+    $erros[] = "Nome é obrigatório.";
+}
 
-    if (!is_numeric($preco) || $preco <= 0) {
-        $erros[] = 'Preço inválido.';
-    }
+if (empty($categoria)) {
+    $erros[] = "Categoria é obrigatória.";
+}
 
-    if (!is_numeric($estoque) || $estoque <= 0) {
-        $erros[] = 'Estoque inválido.';
-    }
+if (strlen($ncm) !== 8 || !ctype_digit($ncm)) {
+    $erros[] = 'NCM inválido: deve conter exatamente 8 dígitos.';
+}
 
-    if (empty($un)) {
-        $erros[] = 'Unidade é obrigatória.';
-    }
-    
-    if (empty($erros)) {
-        $produtos = carregar_produtos(ARQUIVO_JSON);
+if (!is_numeric($preco) || floatval($preco) <= 0) {
+    $erros[] = 'Preço inválido.';
+}
 
-        $ultimo_id = 0;
-        
-        foreach ($produtos as $p) {
-            if ($p['id'] > $ultimo_id) {
-                $ultimo_id = $p['id'];
-            }
+// estoque pode ser 0 (comum), mas não pode ser negativo
+if (!is_numeric($estoque) || floatval($estoque) < 0) {
+    $erros[] = 'Estoque inválido.';
+}
+
+if (empty($un)) {
+    $erros[] = 'Unidade é obrigatória.';
+}
+
+if ($ativo !== '0' && $ativo !== '1') {
+    $erros[] = 'Status inválido.';
+}
+
+if (empty($erros)) {
+    $produtos = carregar_produtos(ARQUIVO_JSON);
+
+    $ultimo_id = 0;
+    foreach ($produtos as $p) {
+        if (isset($p['id']) && $p['id'] > $ultimo_id) {
+            $ultimo_id = $p['id'];
         }
-
-        $proximo_id = $ultimo_id + 1;
-
-        $novo_produto = [
-            'id' => $proximo_id,
-            'nome' => $nome,
-            'categoria' => $categoria,
-            'ncm' => $ncm,
-            'preco' => floatval($preco),
-            'estoque' => floatval($estoque),
-            'unidade' => $un,
-            'ativo' => $ativo,
-            'data_cadastro' =>  date('d/m/Y H:i')
-        ];
-
-        $produtos[] = $novo_produto;
-
-        salvar_produtos(ARQUIVO_JSON, $produtos);
-
     }
+
+    $proximo_id = $ultimo_id + 1;
+
+    $novo_produto = [
+        'id' => $proximo_id,
+        'nome' => $nome,
+        'descricao' => $descricao,
+        'categoria' => $categoria,
+        'ncm' => $ncm,
+        'preco' => floatval($preco),
+        'estoque' => floatval($estoque),
+        'unidade' => $un,
+        'ativo' => $ativo,
+        'data_cadastro' => date('d/m/Y H:i'),
+    ];
+
+    $produtos[] = $novo_produto;
+
+    salvar_produtos(ARQUIVO_JSON, $produtos);
+}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -88,14 +97,14 @@ require_once 'data.php';
     <div class="alert a-e">
         <span class="alert-icon">✗</span>
         <div>
-            <?php foreach ($erros as $erro):?>
-                <p><?=$erro?></p>
+            <?php foreach ($erros as $erro): ?>
+                <p><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></p>
             <?php endforeach; ?>
         </div>
-    </div>               
+    </div>
     <a href="cadastro.php" class="btn btn-s">← Voltar e corrigir</a>
-        
-<?php endif;?>
+
+<?php endif; ?>
 
 </body>
 </html>

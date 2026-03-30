@@ -1,8 +1,8 @@
-<?php 
-    require_once 'data.php';
-    require_once 'config.php';
+<?php
+require_once 'data.php';
+require_once 'config.php';
 
-    $produtos = carregar_produtos(ARQUIVO_JSON);
+$produtos = carregar_produtos(ARQUIVO_JSON);
 ?>
 
 <!DOCTYPE html>
@@ -34,17 +34,19 @@
 
                 <div class="form-group">
                     <label>Produto <span class="req">*</span></label>
-                    <select name="produto">
+                    <select name="produto" required>
                         <option value="" disabled selected>Selecione um produto</option>
                         <?php foreach ($produtos as $p): ?>
-                            <option value="<?= $p['id'] ?>"><?= $p['nome'] ?></option>
+                            <option value="<?= htmlspecialchars((string)($p['id'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
+                                <?= htmlspecialchars((string)($p['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Regime tributário <span class="req">*</span></label>
-                    <select name="regime">
+                    <select name="regime" required>
                         <option value="" disabled selected>Selecione o regime</option>
                         <option value="ttd xx">TTD XX</option>
                         <option value="convenio xx">Convênio XX</option>
@@ -53,7 +55,7 @@
 
                 <div class="form-group">
                     <label>Tipo de venda <span class="req">*</span></label>
-                    <select name="regiao">
+                    <select name="regiao" required>
                         <option value="" disabled selected>Selecione</option>
                         <option value="interna/sc">Interna (SC)</option>
                         <option value="externa">Externa</option>

@@ -38,11 +38,11 @@ This repository was built to practice **PHP fundamentals** in a realistic, multi
 ├── process_cadastro.php    # Receives POST, validates and saves to JSON
 ├── consulta.php            # Product selection, regime and region form
 ├── process_consulta.php    # Crosses product + regime + region, returns fiscal data
-├── tax_rules.php               # Associative array with fictional tax rules (ICMS, IPI, PIS, COFINS)
+├── tax_rules.php           # Associative array with fictional tax rules (ICMS, IPI, PIS, COFINS)
 ├── config.php              # Global constants (JSON file path, settings)
 ├── data.php                # Read/write functions for JSON — isolated data layer
 ├── style.css               # Full design system (dark fintech theme)
-├── produtos.json           # Persistent product database (auto-generated)
+├── cadastro_produtos.json  # Persistent product database (auto-generated)
 └── README.md               # Documentation
 ```
 ---
@@ -52,7 +52,7 @@ This repository was built to practice **PHP fundamentals** in a realistic, multi
 ### 1. Product Registration
 - Collects: name, description, price, category, stock, unit, NCM (8 digits), active status
 - Auto-generates: sequential ID, registration timestamp (America/Sao_Paulo)
-- Persists data to `produtos.json` via `file_put_contents`
+- Persists data to `cadastro_produtos.json` via `file_put_contents`
 
 ### 2. Fiscal Consultation
 - User selects a registered product, a tax regime and a destination region
@@ -86,8 +86,8 @@ This repository was built to practice **PHP fundamentals** in a realistic, multi
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/edinorneto/cadastro-fiscal-php.git
-   cd cadastro-fiscal-php
+   git clone https://github.com/edinorneto/tax-rule-php.git
+   cd tax-rule-php
    ```
 
 2. **Run with PHP built-in server**
