@@ -86,15 +86,15 @@ if (empty($erros)) {
 <body>
 
 <?php if (empty($erros)): ?>
-    <div class="alert a-s">
+    <div class="alert alert-success">
         <span class="alert-icon">✓</span>
         <div>Produto cadastrado com sucesso!</div>
-        <a href="cadastro.php" class="btn btn-s">+ Novo cadastro</a>
-        <a href="index.php" class="btn btn-p">Menu principal →</a>
+        <a href="cadastro.php" class="btn-secondary">+ Novo cadastro</a>
+        <a href="index.php" class="btn-primary">Menu principal →</a>
     </div>
 
 <?php else: ?>
-    <div class="alert a-e">
+    <div class="alert alert-error">
         <span class="alert-icon">✗</span>
         <div>
             <?php foreach ($erros as $erro): ?>
@@ -102,7 +102,7 @@ if (empty($erros)) {
             <?php endforeach; ?>
         </div>
     </div>
-    <a href="cadastro.php" class="btn btn-s">← Voltar e corrigir</a>
+    <a href="cadastro.php" class="btn-secondary">← Voltar e corrigir</a>
 
 <?php endif; ?>
 

@@ -68,7 +68,7 @@
                         <select id="unidade" name="unidade" required>
                             <option value="" disabled selected>—</option>
                             <option>kg</option>
-                            <option>t</option>
+                            <option>T</option>
                             <option>un</option>
                             <option>L</option>
                         </select>
@@ -105,7 +105,7 @@
     </div>
 
     <footer class="page-footer">
-        Projeto de estudo · <a href="https://linkedin.com/in/edinor-de-souza-neto">Edinor de Souza Neto</a> · PHP 8
+        Projeto de estudo · <a href="https://linkedin.com/in/edinor-de-souza-neto">Edinor de Souza Neto</a> · PHP
     </footer>
 </body>
 </html>

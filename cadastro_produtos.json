@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "nome": "ureia",
+        "descricao": "ureia agricola",
+        "categoria": "Fertilizante",
+        "ncm": "12345678",
+        "preco": 2427.25,
+        "estoque": 100,
+        "unidade": "t",
+        "ativo": "1",
+        "data_cadastro": "30\/03\/2026 17:13"
+    },
+    {
+        "id": 2,
+        "nome": "ureia",
+        "descricao": "agricola",
+        "categoria": "Fertilizante",
+        "ncm": "12345678",
+        "preco": 2417.45,
+        "estoque": 100,
+        "unidade": "t",
+        "ativo": "1",
+        "data_cadastro": "31\/03\/2026 00:06"
+    },
+    {
+        "id": 3,
+        "nome": "8BitDo Official Store",
+        "descricao": "aa",
+        "categoria": "Insumo",
+        "ncm": "12345678",
+        "preco": 3333,
+        "estoque": 1,
+        "unidade": "T",
+        "ativo": "1",
+        "data_cadastro": "31\/03\/2026 00:17"
+    }
+]

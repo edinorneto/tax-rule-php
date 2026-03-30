@@ -23,7 +23,7 @@ $produtos = carregar_produtos(ARQUIVO_JSON);
 
     <div class="card">
         <div class="card-header">
-            <div class="card-hl">
+            <div class="card-header-left">
                 <div class="dot"></div>
                 <h2>Parâmetros da consulta</h2>
             </div>
@@ -63,7 +63,7 @@ $produtos = carregar_produtos(ARQUIVO_JSON);
                 </div>
 
                 <div class="form-group">
-                    <label>Estado de destino</label>
+                    <label>Estado de destino <span class="hint">Somente para venda externa</span></label>
                     <select name="estado">
                         <option value="" disabled selected>Selecione o estado</option>
                         <option value="pr">PR</option>
@@ -74,8 +74,8 @@ $produtos = carregar_produtos(ARQUIVO_JSON);
                 </div>
 
                 <div class="btn-row">
-                    <a href="index.php" class="btn btn-s">Cancelar</a>
-                    <button type="submit" class="btn btn-p">Calcular tributos →</button>
+                    <a href="index.php" class="btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn-primary">Calcular tributos →</button>
                 </div>
 
             </form>
@@ -83,7 +83,7 @@ $produtos = carregar_produtos(ARQUIVO_JSON);
     </div>
 
     <footer class="page-footer">
-        Projeto de estudo · <a href="https://www.linkedin.com/in/edinor-de-souza-neto/" target="_blank">Edinor de Souza Neto</a> · PHP 8.x
+        Projeto de estudo · <a href="https://www.linkedin.com/in/edinor-de-souza-neto/" target="_blank">Edinor de Souza Neto</a> · PHP
     </footer>
 
 </body>
