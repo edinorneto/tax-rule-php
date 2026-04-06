@@ -31,38 +31,33 @@ function salvar_produtos($caminho, $produtos) {
     }
 }
 
-function atualizar_produto($arquivo, $id, $novos_dados) { // recebe caminho do JSON, id que quero att e array com campos vindos do formulário
-    $dados = carregar_produtos($arquivo); // 1 - carregar le o arquivo json e retorna um array de produtos (minha funcao pronta, so indicar o que ela recebe)
+function atualizar_produto($arquivo, $id, $novos_dados) {
+    $dados = carregar_produtos($arquivo);
 
-    foreach ($dados as $i => $produto) { // 2 - achar. para cada indice do array => produto
-        if ($id == $produto['id']) { // se o produto atual, é id que quero
-            $produto_atualizado = $produto; // atualizo, inicio o merge
+    foreach ($dados as $i => $produto) {
+        if ($id == $produto['id']) {
+            $produto_atualizado = $produto;
 
-            foreach ($novos_dados as $campo => $valor) { // 3 - alterar. pra cada campo que veio do formulário 
+            foreach ($novos_dados as $campo => $valor) {
+                if ($campo === 'id' || $campo === 'data_cadastro') continue;
+                if (trim((string)$valor) === '') continue;
 
-                if ($campo === 'id' || $campo === 'data_cadastro') continue; // se houve alteração em algum campo desse desconsidere
-
-                if (trim((string)$valor) === '') continue; // se ficar em branco desconsidere
-
-                if ($campo === 'preco' || $campo === 'estoque') { // se for preco ou estoque e o valor não for numérico desconsidere
+                if ($campo === 'preco' || $campo === 'estoque') {
                     if (!is_numeric($valor)) continue;
-                    $produto_atualizado[$campo] = floatval($valor); // se nao, converta pra valor
+                    $produto_atualizado[$campo] = floatval($valor);
                     continue;
                 }
 
-                $produto_atualizado[$campo] = trim((string)$valor); // se for um campo sem ser os mencioados, salva o valor
-
+                $produto_atualizado[$campo] = trim((string)$valor);
             }
 
-            $dados[$i] = $produto_atualizado; // faz a atualizacao a partir do id
-            salvar_produtos($arquivo, $dados); // salva
-            return $produto_atualizado; // retorna o valor atualizado
-
+            $dados[$i] = $produto_atualizado;
+            salvar_produtos($arquivo, $dados);
+            return $produto_atualizado;
         }
     }
-    
-    return false; // se nao achar, retorna falso
 
+    return false;
 }
 
 function alternar_status($arquivo, $id) {
@@ -70,9 +65,9 @@ function alternar_status($arquivo, $id) {
     $dados = carregar_produtos($arquivo);
 
     foreach ($dados as $i => $produto) {
-        $produto_atualizado = $produto;
 
         if ($id == $produto['id']) {
+            $produto_atualizado = $produto;
             
             $novo_status = ($produto_atualizado['ativo'] === '1') ? '0' : '1';
             $produto_atualizado['ativo'] = $novo_status;
