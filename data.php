@@ -65,4 +65,27 @@ function atualizar_produto($arquivo, $id, $novos_dados) { // recebe caminho do J
 
 }
 
+function alternar_status($arquivo, $id) {
+    
+    $dados = carregar_produtos($arquivo);
+
+    foreach ($dados as $i => $produto) {
+        $produto_atualizado = $produto;
+
+        if ($id == $produto['id']) {
+            
+            $novo_status = ($produto_atualizado['ativo'] === '1') ? '0' : '1';
+            $produto_atualizado['ativo'] = $novo_status;
+
+            $dados[$i] = $produto_atualizado;
+
+            salvar_produtos($arquivo, $dados);
+            return $produto_atualizado;
+        }
+    }
+
+    return false;
+
+}
+
 ?>
