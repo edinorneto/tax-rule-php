@@ -83,4 +83,24 @@ function alternar_status($arquivo, $id) {
 
 }
 
+function apagar_produto($arquivo, $id) {
+
+    $dados = carregar_produtos($arquivo);
+
+    foreach ($dados as $i => $produto) {
+        
+        if ($id == $produto['id']) {
+            $produto_apagado = $produto;
+
+            unset($dados[$i]);
+            $dados = array_values($dados);
+            
+            salvar_produtos($arquivo, $dados);
+            return $produto_apagado;
+        }
+    }
+
+    return false;
+}
+
 ?>
