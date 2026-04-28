@@ -38,23 +38,32 @@ $produtos = carregar_produtos(ARQUIVO_JSON);
                     <tbody>
                         <?php if (!empty($produtos)) { ?>
                             <?php foreach ($produtos as $item) { ?>
+                                <?php $ativo = !empty($item['ativo']); ?>
                                 <tr>
                                     <td><?= htmlspecialchars($item['nome'] ?? '') ?></td>
                                     <td><?= htmlspecialchars($item['categoria'] ?? '') ?></td>
                                     <td><?= htmlspecialchars($item['ncm'] ?? '') ?></td>
                                     <td>R$ <?= number_format((float)($item['preco'] ?? 0), 2, ',', '.') ?></td>
-                                    <td><?= htmlspecialchars(number_format((float)($item['estoque'] ?? 0), 2, ",", ".")) ?></td>
-                                    <?php $ativo = !empty($item['ativo']); ?>
+                                    <td><?= htmlspecialchars(number_format((float)($item['estoque'] ?? 0), 2, ',', '.')) ?></td>
                                     <td><?= $ativo ? 'Ativo' : 'Inativo' ?></td>
                                     <td>
-                                        <a href="produto-form.php?id=<?= urlencode((string)($item['id'] ?? '')) ?>">Editar</a>
-                                        <a href="produto-status.php?id=<?= urlencode((string)($item['id'] ?? '')) ?>">
-                                            <?= $ativo ? 'Inativar' : 'Ativar' ?>
-                                        </a>
-                                        <a href="produto-apagar.php?id=<?= urlencode((string)($item['id'] ?? '')) ?>"
-                                        onclick="return confirm('Tem certeza que deseja apagar este produto?');">
-                                        Apagar
-                                        </a>
+                                        <a href="editar.php?id=<?= urlencode((string)($item['id'] ?? '')) ?>">Editar</a>
+
+                                        <form action="process_status.php" method="post" style="display:inline;">
+                                            <input type="hidden" name="id" value="<?= htmlspecialchars((string)($item['id'] ?? '')) ?>">
+                                            <button type="submit" style="background:none;border:none;color:#0d6efd;cursor:pointer;padding:0;">
+                                                <?= $ativo ? 'Inativar' : 'Ativar' ?>
+                                            </button>
+                                        </form>
+
+                                        <form action="process_apagar.php" method="post" style="display:inline;">
+                                            <input type="hidden" name="id" value="<?= htmlspecialchars((string)($item['id'] ?? '')) ?>">
+                                            <button type="submit"
+                                                    style="background:none;border:none;color:#dc3545;cursor:pointer;padding:0;"
+                                                    onclick="return confirm('Tem certeza que deseja apagar este produto permanentemente?');">
+                                                Apagar
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php } ?>

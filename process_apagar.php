@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = trim($_POST['id'] ?? '');
 
 if ($id !== '') {
-    alternar_status(ARQUIVO_JSON, $id);
+    apagar_produto(ARQUIVO_JSON, $id);
 }
 
 header('Location: produtos.php');
