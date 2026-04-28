@@ -41,6 +41,17 @@
             <div class="menu-card-arrow">Acessar &rarr;</div>
         </a>
 
+        <a href="produtos.php" class="menu-card">
+            <div>
+                <span class="menu-card-icon">🗂️</span>
+                <h2 class="menu-card-title">Gerenciar Produtos</h2>
+                <p class="menu-card-desc">
+                    Visualize a lista, edite, ative/inative e apague produtos cadastrados.
+                </p>
+            </div>
+            <div class="menu-card-arrow">Acessar &rarr;</div>
+        </a>
+
     </main>  
 
     <footer class="page-footer">
