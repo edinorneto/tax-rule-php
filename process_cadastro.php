@@ -10,7 +10,7 @@ $ncm = trim($_POST['ncm'] ?? '');
 $preco = trim($_POST['preco'] ?? '');
 $estoque = trim($_POST['estoque'] ?? '');
 $un = trim($_POST['unidade'] ?? '');
-$ativo = trim($_POST['ativo'] ?? '1'); // 1=Ativo, 0=Inativo
+$ativo = trim((string)($_POST['ativo'] ?? '1')); // '1' ou '0' // 1=Ativo, 0=Inativo
 
 $erros = [];
 
@@ -65,7 +65,7 @@ if (empty($erros)) {
         'preco' => floatval($preco),
         'estoque' => floatval($estoque),
         'unidade' => $un,
-        'ativo' => $ativo,
+        'ativo' => (int)$ativo,
         'data_cadastro' => date('d/m/Y H:i'),
     ];
 

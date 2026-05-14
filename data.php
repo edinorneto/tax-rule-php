@@ -35,7 +35,9 @@ function atualizar_produto($arquivo, $id, $novos_dados) {
     $dados = carregar_produtos($arquivo);
 
     foreach ($dados as $i => $produto) {
-        if ($id == $produto['id']) {
+
+        if ($id == ($produto['id'] ?? null)) {
+            
             $produto_atualizado = $produto;
 
             foreach ($novos_dados as $campo => $valor) {
@@ -66,14 +68,14 @@ function alternar_status($arquivo, $id) {
 
     foreach ($dados as $i => $produto) {
 
-        if ($id == $produto['id']) {
+        if ($id == ($produto['id'] ?? null)) {
             $produto_atualizado = $produto;
             
-            $novo_status = ($produto_atualizado['ativo'] === '1') ? '0' : '1';
-            $produto_atualizado['ativo'] = $novo_status;
+            $ativo_atual = !empty($produto_atualizado['ativo']) ? 1 : 0;
+            
+            $produto_atualizado['ativo'] = $ativo_atual ? 0 : 1;
 
             $dados[$i] = $produto_atualizado;
-
             salvar_produtos($arquivo, $dados);
             return $produto_atualizado;
         }
@@ -89,7 +91,7 @@ function apagar_produto($arquivo, $id) {
 
     foreach ($dados as $i => $produto) {
         
-        if ($id == $produto['id']) {
+        if ($id == ($produto['id'] ?? null)) {
             $produto_apagado = $produto;
 
             unset($dados[$i]);
