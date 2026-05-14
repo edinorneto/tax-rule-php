@@ -15,7 +15,11 @@ $ncm       = trim($_POST['ncm'] ?? '');
 $preco     = trim($_POST['preco'] ?? '');
 $estoque   = trim($_POST['estoque'] ?? '');
 $unidade   = trim($_POST['unidade'] ?? '');
-$ativo = ($_POST['ativo'] ?? '1') === '1' ? 1 : 0;
+$ativo = trim((string)($_POST['ativo'] ?? '1'));
+if ($ativo !== '0' && $ativo !== '1') {
+    $erros[] = 'Status inválido.';
+}
+$ativo = (int)$ativo;
 
 $erros = [];
 
@@ -92,7 +96,7 @@ if (empty($erros)) {
                     <p><strong>Não foi possível atualizar:</strong></p>
                     <ul>
                         <?php foreach ($erros as $erro) { ?>
-                            <li><?= htmlspecialchars($erro) ?></li>
+                            <li><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></li>
                         <?php } ?>
                     </ul>
                     <p>
@@ -100,7 +104,7 @@ if (empty($erros)) {
                         <a class="btn btn-primary" href="produtos.php">Ir para lista</a>
                     </p>
                 <?php } else { ?>
-                    <p><?= htmlspecialchars($mensagem) ?></p>
+                    <p><?= htmlspecialchars($mensagem, ENT_QUOTES, 'UTF-8') ?></p>
                     <p>
                         <a class="btn btn-secondary" href="produtos.php">Voltar para lista</a>
                         <?php if ($sucesso) { ?>
