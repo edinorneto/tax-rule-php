@@ -3,6 +3,12 @@ require_once 'config.php';
 require_once 'data.php';
 require_once 'tax_rules.php';
 
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    http_response_code(405);
+    header('Location: index.php');
+    exit;
+}
+
 $produto_id = $_POST['produto'] ?? "";
 $regime = $_POST['regime'] ?? "";
 $regiao = $_POST['regiao'] ?? "";

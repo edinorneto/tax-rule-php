@@ -2,8 +2,9 @@
 require_once 'data.php';
 require_once 'config.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: produtos.php');
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    http_response_code(405);
+    header('Location: index.php');
     exit;
 }
 

@@ -3,6 +3,12 @@
 require_once 'config.php';
 require_once 'data.php';
 
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    http_response_code(405);
+    header('Location: index.php');
+    exit;
+}
+
 $nome = trim($_POST['nome'] ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
 $categoria = trim($_POST['categoria'] ?? '');
