@@ -8,6 +8,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     exit;
 }
 
+$erros = [];
+
 $id        = trim($_POST['id'] ?? '');
 $nome      = trim($_POST['nome'] ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
@@ -22,7 +24,7 @@ if ($ativo !== '0' && $ativo !== '1') {
 }
 $ativo = (int)$ativo;
 
-$erros = [];
+
 
 if ($id === '') {
     $erros[] = 'ID do produto é obrigatório.';
